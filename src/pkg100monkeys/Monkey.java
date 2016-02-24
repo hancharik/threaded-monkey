@@ -6,6 +6,7 @@
 package pkg100monkeys;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JButton;
 
@@ -16,7 +17,7 @@ import javax.swing.JButton;
 public class Monkey extends JButton{
     
     private int monkeyId;
-    private int price;
+    private double price;
     private int rateOfGrowth;
     private int levelOfDisease;
     private TownsFolk owner;
@@ -48,7 +49,7 @@ public class Monkey extends JButton{
         levelOfDisease = 0;
         openMarketMonkey = true;
         mojo = 0;
-        price = 100;
+        price = 0.10;
         fullName = nameMonkey(true);
         setOwnerToMarket();
 
@@ -60,7 +61,7 @@ public class Monkey extends JButton{
  public int increasePrice(int rg){
      setRateOfGrowth(rg);
      int increase = (int)(Math.random()*rateOfGrowth) + primeMonkeyIndicator;
-     int newprice = (price * increase)/100;
+     double newprice = (price * increase)/100;
      
      System.out.print("monkey #" + monkeyId + " was $" + price );
      
@@ -81,14 +82,14 @@ public class Monkey extends JButton{
  
      public void increasePriceOldWay(){
      
-     int newprice = (price * 120)/100;
+     double newprice = (price * 120)/100;
      
      System.out.print("monkey #" + monkeyId + " was $" + price );
      
      price = newprice;
      System.out.println( ", new price is $" + price);
  } 
-   public int getPrice(){
+   public double getPrice(){
        
        return price;
    } 
@@ -163,17 +164,25 @@ public class Monkey extends JButton{
       
       String temp11;
       
+      
+            DecimalFormat myFormatter = new DecimalFormat("#.00");
+            String fprice = myFormatter.format(price);
+      
+      
+      
+      
+      
       if(thisMonkeyHasAName){
           if(owner.getSSN()==999){
-      temp11 = fullName + " is worth $"  + price + ", owned by NO ONE (market monkey)" ;
+      temp11 = fullName + " is worth $"  + fprice + ", owned by NO ONE (market monkey)" ;
       }else{
-        temp11 = fullName + " is worth $"  + price + ", owned by ssn #" + owner.getSSN() + ".    " ;
+        temp11 = fullName + " is worth $"  + fprice + ", owned by ssn #" + owner.getSSN() + ".    " ;
       }
        }else{
          if(owner.getSSN()==999){
-      temp11 = "monkey #" + monkeyId +" is worth $"  + price + ", owned by NO ONE (market monkey)" ; 
+      temp11 = "monkey #" + monkeyId +" is worth $"  + fprice + ", owned by NO ONE (market monkey)" ; 
      }else{
-      temp11 = "monkey #" + monkeyId + " is worth $"  + price + ", owned by ssn #" + owner.getSSN() + ".    " ;// 
+      temp11 = "monkey #" + monkeyId + " is worth $"  + fprice + ", owned by ssn #" + owner.getSSN() + ".    " ;// 
      }   
        }
       

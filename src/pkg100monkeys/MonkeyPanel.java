@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -648,9 +649,11 @@ private void colorMarket(){
         
         
                 if (obj == startButton){
-
+                    
+                    long startTime = System.currentTimeMillis();
                      scroll.setVisible(true);
                      page.setVisible(false);
+                     pageButton.setVisible(true);
                     setBackground(randomColor(theme));
                     showText.setText(null);
                     showText.setBackground(Color.yellow);
@@ -671,8 +674,17 @@ private void colorMarket(){
                    numberOfMonkeysLabel.setText(""); 
                   marketButton.setText( monkeysInTheMarket() + " market monkeys");
                     colorSoldMonkeys();
-                    resultLabel.setText("<html><h2><font color='black' >" +  numberOfTransactions + " transactions"  + "</font></h2></html>");
-                    
+                    double endTime = System.currentTimeMillis();
+                    double totalTime = endTime - startTime;
+                    double timePerT = (totalTime * 1000)  / (numberOfTransactions * 1000) ;
+                    double timePerM =   (numberOfTransactions * 1000)  / (totalTime * 1000);
+                    DecimalFormat myFormatter = new DecimalFormat("#.00");
+                    double value = Math.random() * System.currentTimeMillis();
+                    String outputT = myFormatter.format(timePerT);
+                    String outputM = myFormatter.format(timePerM);
+                    resultLabel.setText("<html><h2><font color='black' >" + outputM + " t/ms" +  "</font></h2></html>");
+                     marketButton.setText(outputT + " ms/t" );
+                    titleLabel.setText("<html><h2><font color='black' >" +  numberOfTransactions + " transactons in "  + totalTime + " msec" +  "</font></h2></html>");
                 }
                 
                 if (obj == showTransButton){
@@ -692,7 +704,7 @@ private void colorMarket(){
                  if (obj == showPeopleButton){
                    
                      showPeople();
-                     
+                     scroll.setVisible(true);
                      titleLabel.setVisible(true);
                      quickSimButton2.setVisible(true);
                      showPeopleButton.setVisible(false);
@@ -741,8 +753,9 @@ private void colorMarket(){
                 if (obj == quickSimButton){
 
                     showPeople();
+                    pageButton.setVisible(false);
                     showTransButton.setVisible(false);
-                     startButton.setVisible(true);
+                    startButton.setVisible(true);
                      showPeopleButton.setVisible(false);
                     removeMonkeyPanels();
                     String bannre3 = "<html><h2><font color='blue'>" +  "monkey time!"  + "</font><font color='red'>" +  "   monkey monkey!" + "</font><h1></html>";

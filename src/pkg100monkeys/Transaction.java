@@ -5,6 +5,8 @@
  */
 package pkg100monkeys;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author mark
@@ -38,7 +40,7 @@ public class Transaction implements Runnable{
     ////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     
-  public void generateTransaction(){
+  public synchronized void generateTransaction(){
       
         if(monkey.openMarketMonkey()){
             
@@ -95,9 +97,13 @@ public class Transaction implements Runnable{
             whatDoWeCallBuyer = callMeMarket(whatDoWeCallBuyer, buyer.getSSN());
             whatDoWeCallSeller = callMeMarket(whatDoWeCallSeller, seller.getSSN());
         
+            
+            DecimalFormat myFormatter = new DecimalFormat("#.00");
+            String priceoutput = myFormatter.format(m.getPrice());
+            
         
                 String temp = space+"trans #" + id + ":" +   " merchant # " + mm.getMerchantId() + " helped " + whatDoWeCallBuyer
-                        + " buy " + pseudonym + " from " + whatDoWeCallSeller +" for $" + m.getPrice() + " (+" + increaseAmount%100 + "%)";
+                        + " buy " + pseudonym + " from " + whatDoWeCallSeller +" for $" +  priceoutput + " (+" + increaseAmount%100 + "%)";
         record = temp;
      
   } 
