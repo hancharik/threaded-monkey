@@ -21,7 +21,11 @@ public class TownsFolk extends JButton{
     private ArrayList<Monkey> monkeys;
     private boolean uniqueID = false;
     private String name = "no name yet";
-    
+    //private double bankAccount;
+    private BankAccount checking; 
+    private BankAccount savings;
+       
+       
     
     public TownsFolk(){  // no int in the constructor means this is a robot
     
@@ -57,6 +61,7 @@ public class TownsFolk extends JButton{
          buyTransactions = new ArrayList<Transaction>();
         sellTransactions = new ArrayList<Transaction>();
       name = namePerson(false);
+      createBankAccounts();
   }   
      
     
@@ -401,6 +406,46 @@ public void setSSN(int n) {
     
     
     
+   
+   
+   private void createBankAccounts(){
+       
+      
+    double checkingAccountNumber =  ssn + 0.1;
+    double savingsAccountNumber =  ssn + 0.2;
+    
+    
+    
+    double checkingAccountBalance = ((int) Math.random()*100000)/100;
+    double savingsAccountBalance = ((int) Math.random()*100000)/100;
+    
+    
+    
+                    
+       
+    this.checking = new BankAccount(checkingAccountNumber, checkingAccountBalance); 
+    this.savings = new BankAccount(savingsAccountNumber, savingsAccountBalance); 
+       
+       
+       
+       
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
     
     
 }  // end class
